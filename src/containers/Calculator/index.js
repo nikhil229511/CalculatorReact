@@ -46,13 +46,15 @@ export class Calculator extends Component {
     const { currentOperation, currentValue, calculationStack } = this.state;
     const stack = calculationStack;
     let val1, val2, result;
-    
+
     if (!currentOperation) {
       stack.push(currentValue);
       this.setState({
           calculationStack: stack,
           currentOperation: currentOp,
-          currentValue: ''
+          currentValue: currentValue,
+          finalvalue: currentValue,
+          showResult: true,
       });
     } else {
         val1 = currentValue;
@@ -62,10 +64,35 @@ export class Calculator extends Component {
         this.setState({
             calculationStack: stack,
             currentOperation: currentOp,
-            currentValue: '',
-            finalValue: result,
-            showResult: true,
+            currentValue: ''
         });
+    }
+  };
+
+  onChangeScientificOperator = (currentOp) => {
+    const { calculationStack, currentOperation, currentValue } = this.state;
+    const stack = calculationStack;
+    let val1, val2, result;
+    if (!currentOperation) {
+      result = this.calculateResult(currentValue, val1, currentOp);
+      this.setState({
+        calculationStack: [result],
+        currentOperation: '=',
+        currentValue: result,
+        finalValue: result,
+        showResult: true,
+    });
+    } else {
+      val2 = stack.pop();
+      result = this.calculateResult(val2, val1, currentOp);
+      stack.push(result);
+      this.setState({
+        calculationStack: stack,
+        currentOperation: '=',
+        currentValue: '',
+        finalValue: result,
+        showResult: true,
+      });
     }
   };
 
@@ -83,6 +110,12 @@ export class Calculator extends Component {
         return val2 / val1;
       case '=':
         return val2;
+      case 'square':
+        return Math.pow(val2, 2);
+      case 'squareRoot':
+        return Math.sqrt(val2);
+      case 'absolute':
+        return (val2 < 0 ? Math.abs(val2): (val2 > 0 ? (Math.abs(val2) * -1): val2));
       default:
         break;
     }
@@ -146,6 +179,7 @@ export class Calculator extends Component {
                 value={'+/-'}
                 visibilityMode={visibilityMode}
                 operation={ABSOLUTE}
+                onChangeOperator={this.onChangeScientificOperator}
               />
             </Col>
             <Col span={8}>
@@ -153,6 +187,7 @@ export class Calculator extends Component {
                 value={'Square'}
                 visibilityMode={visibilityMode}
                 operation={SQUARE}
+                onChangeOperator={this.onChangeScientificOperator}
               />
             </Col>
             <Col span={8}>
@@ -160,6 +195,7 @@ export class Calculator extends Component {
                 value={'Square Root'}
                 visibilityMode={visibilityMode}
                 operation={SQROOT}
+                onChangeOperator={this.onChangeScientificOperator}
               /></Col>
           </Row>
         </div>

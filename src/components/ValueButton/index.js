@@ -17,7 +17,7 @@ function ValueButton(props) {
 }
 
 ValueButton.propTypes = {
-    value: PropTypes.string,
+    value: PropTypes.number,
     visibilityMode: PropTypes.string,
     onChangeNumeric: PropTypes.func,
 }
