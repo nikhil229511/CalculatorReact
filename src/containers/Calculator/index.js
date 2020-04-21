@@ -24,8 +24,8 @@ export class Calculator extends Component {
       calculationStack: [],
       currentOperation: null,
       currentValue: '',
-      showResult: false,
-      finalValue: '',
+      showResult: true,
+      finalValue: 0,
     }
   };
 
@@ -52,8 +52,8 @@ export class Calculator extends Component {
       this.setState({
           calculationStack: stack,
           currentOperation: currentOp,
-          currentValue: currentValue,
-          finalvalue: currentValue,
+          currentValue: '',
+          finalValue: currentValue,
           showResult: true,
       });
     } else {
@@ -62,9 +62,11 @@ export class Calculator extends Component {
         result = this.calculateResult(val2, val1, currentOperation);
         stack.push(result);
         this.setState({
-            calculationStack: stack,
-            currentOperation: currentOp,
-            currentValue: ''
+          calculationStack: stack,
+          currentOperation: currentOp,
+          currentValue: '',
+          finalValue: result,
+          showResult: true,
         });
     }
   };
