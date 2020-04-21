@@ -10,6 +10,7 @@ import {
   SQUARE,
   SQROOT
 } from '../../constants';
+import { calculateResult } from '../../utils/calculations';
 
 export class Calculator extends Component {
   constructor(props) {
@@ -59,7 +60,7 @@ export class Calculator extends Component {
     } else {
         val1 = currentValue;
         val2 = stack.pop();
-        result = this.calculateResult(val2, val1, currentOperation);
+        result = calculateResult(val2, val1, currentOperation);
         stack.push(result);
         this.setState({
           calculationStack: stack,
@@ -76,7 +77,7 @@ export class Calculator extends Component {
     const stack = calculationStack;
     let val1, val2, result;
     if (!currentOperation) {
-      result = this.calculateResult(currentValue, val1, currentOp);
+      result = calculateResult(currentValue, val1, currentOp);
       this.setState({
         calculationStack: [result],
         currentOperation: '=',
@@ -86,7 +87,7 @@ export class Calculator extends Component {
     });
     } else {
       val2 = stack.pop();
-      result = this.calculateResult(val2, val1, currentOp);
+      result = calculateResult(val2, val1, currentOp);
       stack.push(result);
       this.setState({
         calculationStack: stack,
@@ -95,31 +96,6 @@ export class Calculator extends Component {
         finalValue: result,
         showResult: true,
       });
-    }
-  };
-
-  calculateResult = (val2, val1, operation) => {
-    val2 = parseInt(val2);
-    val1 = parseInt(val1);
-    switch (operation) {
-      case '+':
-        return val2 + val1;
-      case '-':
-        return val2 - val1;
-      case '*':
-        return val2 * val1;
-      case '/':
-        return val2 / val1;
-      case '=':
-        return val2;
-      case 'square':
-        return Math.pow(val2, 2);
-      case 'squareRoot':
-        return Math.sqrt(val2);
-      case 'absolute':
-        return (val2 < 0 ? Math.abs(val2): (val2 > 0 ? (Math.abs(val2) * -1): val2));
-      default:
-        break;
     }
   };
 
