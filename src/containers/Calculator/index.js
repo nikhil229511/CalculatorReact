@@ -104,7 +104,7 @@ export class Calculator extends Component {
     return (
       <div className="calculator-container" style={{backgroundColor: visibilityMode === DARK ? '#000' : '#fff'}}>
         <div className="result-container">
-          <Input value={showResult ? finalValue : currentValue} className={`result-${visibilityMode === LIGHT ? 'light' : 'dark'}`}/>
+          <Input value={showResult ? finalValue : currentValue} className={`result ${visibilityMode === LIGHT ? 'light' : 'dark'}`}/>
         </div>
         <div className="buttons-container">
           <Row>
@@ -134,7 +134,7 @@ export class Calculator extends Component {
           <Row>
             <Col span={6}>
               <Button 
-                className={`clear-button-${visibilityMode === LIGHT ? 'light' : 'dark'}`}
+                className={`clear-button ${visibilityMode === LIGHT ? 'light' : 'dark'}`}
                 onClick = {() => this.setState(this.initialState())}
               >
                 Clear
@@ -181,7 +181,7 @@ export class Calculator extends Component {
           <Row>
             <Col span={8}>
               <Button 
-                className={`action-button-${visibilityMode === LIGHT ? 'light' : 'dark'}`}
+                className={`action-button ${visibilityMode === LIGHT ? 'light' : 'dark'}`}
                 onClick = {() => this.changeScientificVisibility(!showScientific)}
               >
                 {`${showScientific ? 'Hide' : 'Show'} Scientific`}
@@ -189,7 +189,7 @@ export class Calculator extends Component {
             </Col>
             <Col span={8}>
               <Button
-                className={`action-button-${visibilityMode === LIGHT ? 'light' : 'dark'}`}
+                className={`action-button ${visibilityMode === LIGHT ? 'light' : 'dark'}`}
                 onClick={() => this.changeVisibility(LIGHT)}
               >
                 Light Theme
@@ -197,7 +197,7 @@ export class Calculator extends Component {
             </Col>
             <Col span={8}>
               <Button
-                className={`action-button-${visibilityMode === LIGHT ? 'light' : 'dark'}`}
+                className={`action-button ${visibilityMode === LIGHT ? 'light' : 'dark'}`}
                 onClick={() => this.changeVisibility(DARK)}
               >
                 Dark Theme

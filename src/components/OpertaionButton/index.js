@@ -8,7 +8,7 @@ function OperationButton(props) {
   const { value, visibilityMode, onChangeOperator, operation } = props;
   return (
     <Button 
-      className={`operation-button-${visibilityMode === LIGHT ? 'light' : 'dark'}`}
+      className={`operation-button ${visibilityMode === LIGHT ? 'light' : 'dark'}`}
       onClick={() => onChangeOperator(operation || value)}
     >
       {value}

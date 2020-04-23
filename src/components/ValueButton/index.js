@@ -8,7 +8,7 @@ function ValueButton(props) {
   const { value, visibilityMode, onChangeNumeric} = props;
   return (
     <Button
-      className={`number-button-${visibilityMode === LIGHT ? 'light' : 'dark'}`}
+      className={`number-button ${visibilityMode === LIGHT ? 'light' : 'dark'}`}
       onClick={() => onChangeNumeric(value)}
     >
       {value}
